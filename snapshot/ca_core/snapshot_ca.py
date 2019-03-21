@@ -75,6 +75,11 @@ class Snapshot(object):
 
         req_f = SnapshotReqFile(self.req_file_path, changeable_macros=list(macros.keys()))
         pvs = req_f.read()
+        from pathlib import Path
+        with Path('tmp.list').open('w') as fh:
+            for pv in pvs:
+                fh.write("{}\n".format(pv))
+        print("Wrote {}".format(len(pvs)))
 
         self.add_pvs(pvs)
 
